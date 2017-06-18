@@ -35,9 +35,19 @@ class ViewController: UIViewController, UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         myActivityIndicator.stopAnimating()
     }
+    func checkUrl(url: String) -> String{
+        var strUrl = url
+        let flag = strUrl.hasPrefix("http://")
+        if !flag{ // "http://" 를 가지고 있지 않다면??
+            strUrl = "http://" + strUrl
+        }
+        return strUrl
+    }
 
     @IBAction func btnGotoUrl(_ sender: UIButton) {
-        
+        let myUrl = checkUrl(url: txtUrl.text!)
+        txtUrl.text = myUrl
+        loadWebPage(url: myUrl)
     }
     @IBAction func btnGoSite1(_ sender: UIButton) {
         loadWebPage(url: "http://www.naver.com")
